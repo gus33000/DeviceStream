@@ -135,7 +135,7 @@ namespace DeviceStream
         {
             if (string.IsNullOrEmpty(device))
             {
-                throw new ArgumentNullException("Path");
+                throw new ArgumentNullException("device");
             }
 
             uint fileAccess = 0;
@@ -264,7 +264,7 @@ namespace DeviceStream
                 var ncount = count + addedcount;
                 byte[] tmpbuffer = new byte[extrastart + buffer.Length + addedcount];
                 buffer.CopyTo(tmpbuffer, extrastart);
-                InternalRead(tmpbuffer, offset, (int)ncount);
+                InternalRead(tmpbuffer, offset + extrastart, (int)ncount);
                 tmpbuffer.ToList().Skip((int)extrastart).Take(count + offset).ToArray().CopyTo(buffer, 0);
                 return count;
             }
